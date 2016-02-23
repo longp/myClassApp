@@ -8,7 +8,7 @@ const PORT = 3000;
 var connection = new Sequelize('class_db', 'root', '');
 
 
-var Students = connection.define('Student', {
+var Student = connection.define('Student', {
   studentUsername: {
     type: Sequelize.STRING,
     unique: true,
@@ -47,11 +47,16 @@ var Students = connection.define('Student', {
   }  
 });
 
-var Instructors = connection.define ("Instructor", {
+var Instructor = connection.define ("Instructor", {
   instructorType: {
     type:Sequelize.STRING,
     validate: {
-      equals: 'TA' || 'Teacher'
+      equals :{
+        $or: {
+          $eq: 'TA',
+          $eq: 'Teacher'
+        }
+      }
     }
   },
   instructorUsername: {
@@ -92,8 +97,9 @@ var Instructors = connection.define ("Instructor", {
   }
 });
 
-Instructors.belongsTo(Students);
-
+Instructor.belongsTo(Student);
+Student.sync();
+Instructor.sync();
 app.use(session({
   secret:"secret",
   cookie: {
@@ -115,12 +121,55 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/', function  (req, res) {
-  res.render("home")
+  res.render("home");
 });
 
-app.post('/register', function (req, res) {
-
+app.get('/register', function (req, res) {
+  res.render("register");
+});
+app.get('/login',  function (req, res) {
+  res.render('login');
 })
+
+app.post('/student_register', function (req ,res) { 
+  var username = req.body.studentUsername;
+  var firstName = req.body.studentFirstName;
+  var lastName = req.body.studentLastName;
+  var password = req.body.studentPassword;
+
+  Student.create({
+    studentUsername: username,
+    studentFirstName: firstName,
+    studentLastName: lastName,
+    studentPassword: password
+  }).then(function (result) {
+    res.send("<h1> Success </h1>");
+  }).catch(function (err) {
+    console.log(err);
+    res.send("<h1> FAIL </h1>");
+  });
+});
+
+app.post("/instructor_register", function (req, res) {
+  var username = req.body.instructorUsername;
+  var firstName = req.body.instructorFirstName;
+  var lastName = req.body.instructorLastName;
+  var password =req.body.instructorPassword;
+  var type = req.body.instructorType;
+
+  Instructor.create({
+    instructorUsername: username,
+    instructorFirstName: firstName,
+    instructorLastName: lastName,
+    instructorPassword: password,
+    instructorType: type
+  }).then(function (result) {
+    res.send("<h1> Success </h1>");
+  }).catch(function (err) {
+    console.log(err);
+    res.send("<h1> FAIL </h1>")
+  });
+});
 
 
 app.listen(PORT, function () {

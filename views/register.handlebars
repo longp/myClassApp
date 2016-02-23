@@ -1,4 +1,37 @@
-<div class="row">
-  <div class="col-md-12">
-    {{ msg }}
-  </div>
+<div class="container">
+  <form action="/student_register" method="POST">
+    <div class="form-group">
+      <label> Student Username</label>
+      <input type="text" class="form-control" placeholder="Username" name="studentUsername">
+      <label>Student First Name</label>
+      <input type="text" class="form-control" placeholder="first name" name="studentFirstName">
+      <label>Student Last Name</label>
+      <input type="text" class="form-control" placeholder="last name" name="studentLastName">
+      <label>Student Password</label>
+      <input type="text" placeholder="password" class="form-control" name="studentPassword">
+    </div>
+    <button type="submit" class="btn btn-default">SUBMIT</button>
+  </form>
+</div>
+<br>
+
+<div class="container">
+  <form action="instructor_register" method="POST">
+    <div class="form-group">
+    <label> Instructor Username</label>
+    <input type="text" class="form-control" placeholder="username" name="instructorUsername">
+    <label> Instructor first name</label>
+    <input type="text" class="form-control" placeholder="first name" name="instructorFirstName">
+    <label> Instructor last name</label>
+    <input type="text" class="form-control" placeholder="first name" name="instructorLastName">
+    <label> Instructor Password</label>
+    <input type="text" class="form-control" placeholder="password" name="instructorPassword">
+    <label> Instructor type</label>
+    <input type="radio" class="form-control" value="TA" name="instructorType">TA
+    <input type="radio" class="form-control" value="Teacher" name="instructorType">Teacher <br>
+    <input type="submit" class="btn btn-default">
+    </div>   
+  </form>
+</div>
+
+

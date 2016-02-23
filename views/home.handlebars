@@ -1,11 +1,17 @@
   <div class="container">
-    <div class="row well">
+    <div class="row well text-center">
       <h1> MY CLASS APP</h1>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button action="/login" method="get" class="btn btn-info btn-block"> LOGIN </button>
-        <button action="/register" method="get" class="btn btn-warning btn-block"> REGISTER </button>  
+        <form action="/login" method="get">
+          <button type="submit" class="btn btn-info btn-block"> LOGIN </button>     
+        </form>
+      </div>
+      <div class="col-md-6">
+        <form action="/register" method="get">
+          <button type="submit" action="/register" method="GET" class="btn btn-warning btn-block"> REGISTER </button> 
+        </form>        
       </div>
     </div>
   </div>
