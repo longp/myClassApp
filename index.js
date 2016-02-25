@@ -50,13 +50,13 @@ var Student = connection.define('Student', {
 var Instructor = connection.define ("Instructor", {
   instructorType: {
     type:Sequelize.STRING,
-    validate: {
-      equals :{
-        $or: {
-          $eq: 'TA',
-          $eq: 'Teacher'
-        }
-      }
+    validate: {  
+      equals: 
+         "TA",  
+        $or : [{
+            $eq:'Teacher' 
+        }]
+      
     }
   },
   instructorUsername: {
@@ -119,7 +119,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
+app.use("/js", express.static("public/js"));
+app.use("/css", express.static("publicc/css"));
 app.get('/', function  (req, res) {
   res.render("home");
 });
@@ -167,8 +168,10 @@ app.post("/instructor_register", function (req, res) {
     res.send("<h1> Success </h1>");
   }).catch(function (err) {
     console.log(err);
-    res.send("<h1> FAIL </h1>")
+    console.log(type);
+    res.send("<h1> FAIL </h1>");
   });
+  
 });
 
 
