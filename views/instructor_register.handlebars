@@ -1,0 +1,66 @@
+<div>
+<form class="form-horizontal" method="post" action="instructor_register">
+    <fieldset>
+        <!-- Form Name -->
+        <legend>Register</legend>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="name">UserName</label>
+          <div class="col-md-4">
+          <input id="instructorUsername" name="instructorUsername" type="text" placeholder="User Name" class="form-control input-md" required="">
+          <span class="help-block">User Name</span>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">First Name</label>
+          <div class="col-md-4">
+          <input id="instructorFirstName" name="instructorFirstName" type="text" placeholder="First Name" class="form-control input-md" required="">
+          <span class="help-block">First Name</span>
+          </div>
+        </div>
+
+ <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Last Name</label></label>
+          <div class="col-md-4">
+          <input id="instructorLastName" name="instructorLastName" type="text" placeholder="Last Name" class="form-control input-md" required="">
+          <span class="help-block">Last Name</span>
+          </div>
+        </div>
+
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="password">Password </label>
+          <div class="col-md-4">
+            <input id="instructorPassword" name="instructorPassword" type="password" placeholder="Password " class="form-control input-md" required="">
+            <span class="help-block">Password </span>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="selectbasic">Instructor Type</label>
+          <div class="col-md-4">
+            <select id="instructorType" name="instructorType" class="form-control">
+            <option value="">Choose Instructor Type</option>
+            <option value="TA">TA</option>
+            <option value="Teacher">Teacher</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="save"></label>
+          <div class="col-md-8">
+            <button id="save" name="save" type="submit" class="btn btn-success">Save</button>
+            <button id="cancel" name="cancel" class="btn btn-danger">Cancel</button>
+          </div>
+        </div>
+
+        </fieldset>
+        </form>
+</div>

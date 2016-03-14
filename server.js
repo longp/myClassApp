@@ -7,6 +7,8 @@ var app = express();
 const PORT = 3000;
 var connection = new Sequelize('class_db', 'root', '');
 
+app.use("/js", express.static('public/js'));
+app.use("/css", express.static('public/style'));
 
 var Student = connection.define('Student', {
   studentUsername: {
@@ -44,20 +46,12 @@ var Student = connection.define('Student', {
         msg: "Password must be at least 6 characters long"
       }
     }
-  }  
+  }
 });
 
 var Instructor = connection.define ("Instructor", {
   instructorType: {
-    type:Sequelize.STRING,
-    validate: {  
-      equals: 
-         "TA",  
-        $or : [{
-            $eq:'Teacher' 
-        }]
-      
-    }
+    type:Sequelize.STRING
   },
   instructorUsername: {
     type: Sequelize.STRING,
@@ -120,19 +114,40 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/js", express.static("public/js"));
-app.use("/css", express.static("publicc/css"));
+app.use("/css", express.static("public/css"));
 app.get('/', function  (req, res) {
   res.render("home");
 });
 
-app.get('/register', function (req, res) {
-  res.render("register");
+app.get('/student_register', function (req, res) {
+  res.render("student_register");
 });
-app.get('/login',  function (req, res) {
-  res.render('login');
+app.get('/instructor_register', function (req, res) {
+  res.render("instructor_register");
+});
+app.get('/student_login', function (req, res) {
+  res.render("student_login");
+});
+
+app.post('/student_account', function (req, res) {
+  var user = req.body
+  Student.findOne({
+    where:{
+      studentUsername: req.body.studentUsername,
+      studentPassword: req.body.studentPassword
+    }
+  }).then(function (user) {
+    res.render('student_account', {user});
+  })
+});
+
+app.get('/instructor_login',  function (req, res) {
+  res.render('instructor_login');
 })
 
-app.post('/student_register', function (req ,res) { 
+
+
+app.post('/student_register', function (req ,res) {
   var username = req.body.studentUsername;
   var firstName = req.body.studentFirstName;
   var lastName = req.body.studentLastName;
@@ -171,7 +186,7 @@ app.post("/instructor_register", function (req, res) {
     console.log(type);
     res.send("<h1> FAIL </h1>");
   });
-  
+
 });
 
 
